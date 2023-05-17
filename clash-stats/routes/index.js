@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+const clashStatsController = require("../controllers/clashStatsController");
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', clashStatsController.index);
 
 module.exports = router;
