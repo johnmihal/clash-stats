@@ -5,7 +5,8 @@ function get_trophies(playerData){
 };
 
 function get_player_name(playerData){
-    return playerData["name"];
+    console.log(playerData)
+    return playerData.name;
 };
 
 function get_win_rate(playerData){
