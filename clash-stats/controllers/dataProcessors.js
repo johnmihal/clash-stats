@@ -10,7 +10,7 @@ function get_player_name(playerData){
 };
 
 function get_win_rate(playerData){
-    return Math.trunc((playerData["wins"]/playerData["battleCount"])*100);
+    return Math.trunc((playerData["wins"]/(playerData["losses"]+playerData["wins"])*100));
 };
 
 function get_10_game_win_rate(playerBattleLog){

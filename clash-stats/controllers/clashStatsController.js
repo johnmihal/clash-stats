@@ -5,15 +5,18 @@ const axios = require('axios');
 const apiConnection = require("./apiConnection.js");
 const dataProcessors = require("./dataProcessors.js");
 const { response } = require('../app.js');
-API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImQxNzhhYzI1LTdlMTItNGI4Yi1hNTExLTY2YzBkZjRkN2RlOCIsImlhdCI6MTY4NDQ5OTA4Mywic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzQuMjE2LjI0MS41NCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.OlUmk5D_-fjxA9bCy86SSVIqOfI3MP2_DW1U-f5kwCYjjR-r4P75KwnzAtAKQ-md5WooGnCPdnvS0ZswA8vKSg'
+API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImFmNjFlNDcxLTRmNTQtNGY5Yi1hMTQ3LWY5NzNkZWNiN2U2OCIsImlhdCI6MTY4NDUzMzQ2OSwic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI3MS4yNDkuMTE2LjEwMiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.YvpD0gPAbLsS33RAvHsygaYBQg8vdkKBVYY_2XiCn_THmk7cruYcTAo1Ujro3XIFiW2C4XFFWOa67_U5zqlptg'
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
 
 exports.index = (req, res, next) => {
     axios.get('https://api.clashroyale.com/v1/players/'+playerTags[0])
       .then(function(response) {
-         console.log(response.data.name);
+         playerInfo = response.data
          res.render('index', {
-            name: dataProcessors.get_player_name(response.data)
+            name: dataProcessors.get_player_name(playerInfo),
+            trophies: dataProcessors.get_trophies(playerInfo),
+            winrate: dataProcessors.get_win_rate(playerInfo)
+
          })
       }).catch(function(error) {
             console.log(error);
