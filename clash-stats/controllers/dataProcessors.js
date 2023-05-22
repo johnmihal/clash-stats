@@ -34,9 +34,7 @@ function get_10_game_trophies(playerBattleLog){
     for (let i = 0; i < x; i++){
 
         if(playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
-            trophies += playerBattleLog[i]["team"][0]["trophyChange"];
-            console.log(trophies);
-                
+            trophies += playerBattleLog[i]["team"][0]["trophyChange"];                
         }else{
             x++;
         }
@@ -67,8 +65,6 @@ function get_10_game_comparitive_elixir_leak(playerBattleLog){
         if(playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
             playerElixirLeak += playerBattleLog[i]["team"][0]["elixirLeaked"]
             oppononetElixirLeak += playerBattleLog[i]["opponent"][0]["elixirLeaked"]
-            console.log(playerElixirLeak)
-            console.log(oppononetElixirLeak)
         }else{
             x++;
         }
@@ -92,11 +88,13 @@ function get_50_game_comparitive_elixir_leak(playerBattleLog){
     
 }
 
-function is_streak(playerBattleLog){
-    streakLength = 0
-    isStreak = true
-    streakType = none
-    while (isStreak){
+function get_streak(playerBattleLog){
+    let streakLength = 0;
+    let isStreak = true;
+    let streakType = null;
+    let temp_streakType = "";
+
+    for(let i = 0; i < playerBattleLog.length; i++){
         if (playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
             trophies = playerBattleLog[i]["team"][0]["trophyChange"];
             if (trophies > 0){
@@ -107,7 +105,7 @@ function is_streak(playerBattleLog){
                 temp_streakType = "draw";
             }
 
-            if (streakType === none){
+            if (streakType === null){
                 streakType = temp_streakType;
                 streakLength++;
             }else{
@@ -118,76 +116,136 @@ function is_streak(playerBattleLog){
                 }
             }   
         }
-    }
-    return [streakType, streakLength]
-}
 
-function get_streak(playerBattleLog){
-    streakLength = 0
-    isStreak = true
-    streakType = none
-    while (isStreak){
-        if (playerBattleLog[i]["gameMode"]["name"] === "ladder"){
-            trophies = playerBattleLog[i]["team"][0]["trophyChange"];
-            if (trophies > 0){
-                temp_streakType = "win";
-            }else if (trophies < 0){
-                temp_streakType = "lose";
-            }else{
-                temp_streakType = "draw";
-            }
-
-            if (streakType === none){
-                streakType = temp_streakType;
-                streakLength++;
-            }else{
-                if (streakType === temp_streakType){
-                    streakLength++;
-                }else{
-                    isStreak = false;
-                }
-            }   
+        if (isStreak === false){
+            i = playerBattleLog.length
         }
     }
+
     return [streakType, streakLength]
 }
 
 function get_streak_trophies(playerBattleLog){
-    isStreak = true
-    streakType = none
-    streakTrophies = 0
-    while (isStreak){
-        if (playerBattleLog[i]["gameMode"]["name"] === "ladder"){
-            trophies = playerBattleLog[i]["team"][0]["trophyChange"];
-            if (trophies > 0){
+    let streak_trophies = 0;
+    let isStreak = true;
+    let streakType = null;
+    let temp_streakType = "";
+    let temp_trophies = 0;
+
+    for(let i = 0; i < playerBattleLog.length; i++){
+        if (playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
+            temp_trophies = playerBattleLog[i]["team"][0]["trophyChange"];
+            if (temp_trophies > 0){
                 temp_streakType = "win";
-            }else if (trophies < 0){
+            }else if (temp_trophies < 0){
                 temp_streakType = "lose";
             }else{
                 temp_streakType = "draw";
             }
 
-            if (streakType === none){
+            if (streakType === null){
                 streakType = temp_streakType;
-                streakTrophies += trophies;
+                streak_trophies += trophies;
             }else{
                 if (streakType === temp_streakType){
-                    streakTrophies += trophies;
+                    streak_trophies += trophies;
                 }else{
-                    isStreak = false
+                    isStreak = false;
                 }
             }   
         }
+
+        if (isStreak === false){
+            i = playerBattleLog.length
+        }
     }
-    return streakTrophies
+
+    return streak_trophies
 }
 
 function get_streak_game_elixir_leak(playerBattleLog){
-    
+    let streak_el = 0;
+    let streak_len = 0;
+    let isStreak = true;
+    let streakType = null;
+    let temp_streakType = "";
+    let temp_trophies = 0;
+
+    for(let i = 0; i < playerBattleLog.length; i++){
+        if (playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
+            temp_trophies = playerBattleLog[i]["team"][0]["trophyChange"];
+            if (temp_trophies > 0){
+                temp_streakType = "win";
+            }else if (temp_trophies < 0){
+                temp_streakType = "lose";
+            }else{
+                temp_streakType = "draw";
+            }
+
+            if (streakType === null){
+                streakType = temp_streakType;
+                streak_len++;
+                streak_el += playerBattleLog[i]["team"][0]["elixirLeaked"]
+
+            }else{
+                if (streakType === temp_streakType){
+                    streak_len++;
+                    streak_el += playerBattleLog[i]["team"][0]["elixirLeaked"]
+                }else{
+                    isStreak = false;
+                }
+            }   
+        }
+
+        if (isStreak === false){
+            i = playerBattleLog.length
+        }
+    }
+
+    return streak_el/streak_len
 }
 
 function get_streak_game_comparitive_elixir_leak(playerBattleLog){
-    
+    let player_el = 0;
+    let opponent_el = 0;
+    let isStreak = true;
+    let streakType = null;
+    let temp_streakType = "";
+    let temp_trophies = 0;
+
+    for(let i = 0; i < playerBattleLog.length; i++){
+        if (playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
+            temp_trophies = playerBattleLog[i]["team"][0]["trophyChange"];
+            if (temp_trophies > 0){
+                temp_streakType = "win";
+            }else if (temp_trophies < 0){
+                temp_streakType = "lose";
+            }else{
+                temp_streakType = "draw";
+            }
+
+            if (streakType === null){
+                streakType = temp_streakType;
+                player_el += playerBattleLog[i]["team"][0]["elixirLeaked"]
+                opponent_el += playerBattleLog[i]["opponent"][0]["elixirLeaked"]
+
+
+            }else{
+                if (streakType === temp_streakType){
+                    player_el += playerBattleLog[i]["team"][0]["elixirLeaked"]
+                    opponent_el += playerBattleLog[i]["opponent"][0]["elixirLeaked"]
+                }else{
+                    isStreak = false;
+                }
+            }   
+        }
+
+        if (isStreak === false){
+            i = playerBattleLog.length
+        }
+    }
+
+    return player_el-opponent_el
 }
 
 module.exports = { 
