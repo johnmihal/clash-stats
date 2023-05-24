@@ -1,12 +1,53 @@
 extends layout
 
 block content
-  h1(class="title") Welcome to clash stats!
+  h1(class="title") Clash Stats 🔥📈
+  div()
+    h2(class="text-end my-3") #{best_streak_name} has a streak of #{best_streak_length} wins!
+    h3(class="my-4") #{best_10g_wr_name} has a #{best_10g_wr}% win rate for the past 10 games!
+    h4(class="text-center my-6") #{best_20g_wr_name} has a #{best_20g_wr}% win rate for the past 20 games!
+
+  div(class="btn-group mt-5 text-center")
+    if sort === "name"
+      button(class="btn btn-outline-primary disabled ms-2") Name
+    else
+      a(href="/?sort=name"): button(class="btn btn-outline-primary ms-2") Name
+
+    if sort === "trophies"
+      button(class="btn btn-outline-primary disabled ms-2") Trophies
+    else
+      a(href="/?sort=trophies"): button(class="btn btn-outline-primary ms-2") Trophies
+
+
+    if sort === "best-streak"
+      button(class="btn btn-outline-primary disabled ms-2") Best Streak
+    else
+      a(href="/?sort=best-streak"): button(class="btn btn-outline-primary ms-2") Best Streak
+
+
+    if sort === "worst-streak"
+      button(class="btn btn-outline-primary disabled ms-2") Worst Streak
+    else
+      a(href="/?sort=worst-streak"): button(class="btn btn-outline-primary ms-2") Worst Streak
+
+
+    if sort == "10gwr"
+      button(class="btn btn-outline-primary disabled ms-2") 10 Game Win Rate
+    else 
+      a(href="/?sort=10gwr"): button(class="btn btn-outline-primary ms-2") 10 Game Win Rate
+
+
+    if sort === "20gwr"
+      button(class="btn btn-outline-primary disabled ms-2") 20 game Win Rate
+    else
+      a(href="/?sort=20gwr"): button(class="btn btn-outline-primary ms-2") 20 game Win Rate
+
+
   div(class="d-flex row mt-4")
     each player in player_data_list
       div(class="card d-flex mx-4 my-2 shadow p-3 mb-5 rounded" style="width: 18rem;")
         div( class="card-body")
-          h6(class="card-title") #{player.name}
+          h5(class="card-title") #{player.name}
           p(class="card-subtitle mb-2 text-body-secondary") Trophies #{player.trophies}
           p(class="card-subtitle mb-2 text-body-secondary") Win Rate #{player.winrate} %
           ul(class="list-group list-group-flush")

@@ -6,4 +6,6 @@ const clashStatsController = require("../controllers/clashStatsController");
 /* GET home page. */
 router.get('/', clashStatsController.index);
 
+
+
 module.exports = router;
