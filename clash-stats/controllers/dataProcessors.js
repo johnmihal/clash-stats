@@ -16,6 +16,7 @@ function get_10_game_win_rate(playerBattleLog){
     let wins = 0
     let x = 10
     for (let i = 0; i < x; i++){
+        console.log(playerBattleLog[i]["gameMode"]["name"])
 
         if(playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
             if (playerBattleLog[i]["team"][0]["trophyChange"] > 0){
@@ -23,6 +24,9 @@ function get_10_game_win_rate(playerBattleLog){
             }
         }else{
             x++;
+            if (x >playerBattleLog.length){
+                i = x + 1;
+            }
         }
     }
     return Math.trunc((wins/x)*100)
@@ -37,6 +41,9 @@ function get_10_game_trophies(playerBattleLog){
             trophies += playerBattleLog[i]["team"][0]["trophyChange"];                
         }else{
             x++;
+            if (x >playerBattleLog.length){
+                i = x + 1;
+            }
         }
     }
     return trophies
@@ -51,6 +58,9 @@ function get_10_game_elixir_leak(playerBattleLog){
             elixirLeak += playerBattleLog[i]["team"][0]["elixirLeaked"];   
         }else{
             x++;
+            if (x >playerBattleLog.length){
+                i = x + 1;
+            }
         }
     }
     return elixirLeak/10
@@ -67,6 +77,9 @@ function get_10_game_comparitive_elixir_leak(playerBattleLog){
             oppononetElixirLeak += playerBattleLog[i]["opponent"][0]["elixirLeaked"]
         }else{
             x++;
+            if (x >playerBattleLog.length){
+                i = x + 1;
+            }
         }
     }
     return (playerElixirLeak)-(oppononetElixirLeak)

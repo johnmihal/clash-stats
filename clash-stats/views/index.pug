@@ -3,15 +3,31 @@ extends layout
 block content
   h1= title
   p Welcome to clash stats!
-  p Name #{name}
-  p Trophies #{trophies}
-  p Win Rate #{winrate} %
-  p 10 Game win rate #{ten_game_wr}
-  p 10 game trphoies #{ten_game_trophies}
-  p 10 game elixir leak #{ten_game_el}
-  p 10 game comparative elixir leak #{ten_game_el_comp}
-  p #{streak_length} game steak of #{streak_type} 
-  p streak trophies #{streak_trophies}
-  p streak elixir leak #{streak_el}
-  p streak comparative elixir leak #{comp_streak_el}
+
+  ul
+    each player in player_data_list
+      li
+        p Name #{player.name}
+        p Trophies #{player.trophies}
+        p Win Rate #{player.winrate} %
+        p 10 Game win rate #{player.ten_game_wr}
+        p 10 game trphoies #{player.ten_game_trophies}
+        p 10 game elixir leak #{player.ten_game_el}
+        p 10 game comparative elixir leak #{player.ten_game_el_comp}
+        p #{player.streak_length} game steak of #{player.streak_type} 
+        p streak trophies #{player.streak_trophies}
+        p streak elixir leak #{player.streak_el}
+        p streak comparative elixir leak #{player.comp_streak_el}
+
+  //- p Name #{name}
+  //- p Trophies #{trophies}
+  //- p Win Rate #{winrate} %
+  //- p 10 Game win rate #{ten_game_wr}
+  //- p 10 game trphoies #{ten_game_trophies}
+  //- p 10 game elixir leak #{ten_game_el}
+  //- p 10 game comparative elixir leak #{ten_game_el_comp}
+  //- p #{streak_length} game steak of #{streak_type} 
+  //- p streak trophies #{streak_trophies}
+  //- p streak elixir leak #{streak_el}
+  //- p streak comparative elixir leak #{comp_streak_el}
   
