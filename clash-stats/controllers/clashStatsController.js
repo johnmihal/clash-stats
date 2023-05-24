@@ -104,6 +104,7 @@ exports.index = (req, res, next) => {
                 x.trophies = dataProcessors.get_trophies(playerInfo);
                 x.winrate = dataProcessors.get_win_rate(playerInfo);
                 x.ten_game_wr = dataProcessors.get_10_game_win_rate(playerBattleLog);
+                x.twenty_game_wr = dataProcessors.get_20_game_win_rate(playerBattleLog);
                 x.ten_game_trophies = dataProcessors.get_10_game_trophies(playerBattleLog);
                 x.ten_game_el = dataProcessors.get_10_game_elixir_leak(playerBattleLog);
                 x.ten_game_el_comp = dataProcessors.get_10_game_comparitive_elixir_leak(playerBattleLog);

@@ -1,23 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to clash stats!
-
-  ul
+  h1(class="title") Welcome to clash stats!
+  div(class="d-flex row mt-4")
     each player in player_data_list
-      li
-        p Name #{player.name}
-        p Trophies #{player.trophies}
-        p Win Rate #{player.winrate} %
-        p 10 Game win rate #{player.ten_game_wr}
-        p 10 game trphoies #{player.ten_game_trophies}
-        p 10 game elixir leak #{player.ten_game_el}
-        p 10 game comparative elixir leak #{player.ten_game_el_comp}
-        p #{player.streak_length} game steak of #{player.streak_type} 
-        p streak trophies #{player.streak_trophies}
-        p streak elixir leak #{player.streak_el}
-        p streak comparative elixir leak #{player.comp_streak_el}
+      div(class="card d-flex mx-4 my-2 shadow p-3 mb-5 rounded" style="width: 18rem;")
+        div( class="card-body")
+          h6(class="card-title") #{player.name}
+          p(class="card-subtitle mb-2 text-body-secondary") Trophies #{player.trophies}
+          p(class="card-subtitle mb-2 text-body-secondary") Win Rate #{player.winrate} %
+          ul(class="list-group list-group-flush")
+            if player.streak_length != 1
+              li(class="list-group-item") #{player.streak_length} game steak of #{player.streak_type} 
+            else
+              li(class="list-group-item") no streak 
+
+            li(class="list-group-item") 10 Game win rate #{player.ten_game_wr} %
+            li(class="list-group-item") 20 Game win rate #{player.twenty_game_wr} %
+
+            //- li(class="list-group-item") 10 game trophoies #{player.ten_game_trophies}
+            //- li(class="list-group-item") 10 game elixir leak #{player.ten_game_el} elixir
+            //- li(class="list-group-item") 10 game comparative elixir leak #{player.ten_game_el_comp} elixir
+            //- li(class="list-group-item") streak trophies #{player.streak_trophies}
+            //- li(class="list-group-item") streak elixir leak #{player.streak_el} elixir
+            //- li(class="list-group-item") streak comparative elixir leak #{player.comp_streak_el} elixir
 
   //- p Name #{name}
   //- p Trophies #{trophies}

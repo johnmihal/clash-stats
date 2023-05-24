@@ -16,18 +16,28 @@ function get_10_game_win_rate(playerBattleLog){
     let wins = 0
     let x = 10
     for (let i = 0; i < x; i++){
-        console.log(playerBattleLog[i]["gameMode"]["name"])
+        p_crowns = playerBattleLog[i]["team"][0]["crowns"];
+        o_crowns = playerBattleLog[i]["opponent"][0]["crowns"];
 
-        if(playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
-            if (playerBattleLog[i]["team"][0]["trophyChange"] > 0){
-                wins++;
-            }
-        }else{
-            x++;
-            if (x >playerBattleLog.length){
-                i = x + 1;
-            }
+        if (p_crowns > o_crowns){
+            wins++;
         }
+        
+    }
+    return Math.trunc((wins/x)*100)
+}
+
+function get_20_game_win_rate(playerBattleLog){
+    let wins = 0
+    let x = 20
+    for (let i = 0; i < x; i++){
+        p_crowns = playerBattleLog[i]["team"][0]["crowns"];
+        o_crowns = playerBattleLog[i]["opponent"][0]["crowns"];
+
+        if (p_crowns > o_crowns){
+            wins++;
+        }
+        
     }
     return Math.trunc((wins/x)*100)
 }
@@ -63,7 +73,7 @@ function get_10_game_elixir_leak(playerBattleLog){
             }
         }
     }
-    return elixirLeak/10
+    return Math.trunc(elixirLeak/10)
 }
 
 function get_10_game_comparitive_elixir_leak(playerBattleLog){
@@ -82,7 +92,7 @@ function get_10_game_comparitive_elixir_leak(playerBattleLog){
             }
         }
     }
-    return (playerElixirLeak)-(oppononetElixirLeak)
+    return Math.trunc((playerElixirLeak)-(oppononetElixirLeak))
 }
 
 function get_50_game_win_rate(playerBattleLog){
@@ -108,33 +118,32 @@ function get_streak(playerBattleLog){
     let temp_streakType = "";
 
     for(let i = 0; i < playerBattleLog.length; i++){
-        if (playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
-            trophies = playerBattleLog[i]["team"][0]["trophyChange"];
-            if (trophies > 0){
-                temp_streakType = "win";
-            }else if (trophies < 0){
-                temp_streakType = "lose";
-            }else{
-                temp_streakType = "draw";
-            }
+        p_crowns = playerBattleLog[i]["team"][0]["crowns"];
+        o_crowns = playerBattleLog[i]["opponent"][0]["crowns"];
 
-            if (streakType === null){
-                streakType = temp_streakType;
-                streakLength++;
-            }else{
-                if (streakType === temp_streakType){
-                    streakLength++;
-                }else{
-                    isStreak = false;
-                }
-            }   
+        if (p_crowns > o_crowns){
+            temp_streakType = "win";
+        }else if (p_crowns < o_crowns){
+            temp_streakType = "lose";
+        }else{
+            temp_streakType = "draw";
         }
 
+        if (streakType === null){
+            streakType = temp_streakType;
+            streakLength++;
+        }else{
+            if (streakType === temp_streakType){
+                streakLength++;
+            }else{
+                isStreak = false;
+            }
+        }
+        
         if (isStreak === false){
             i = playerBattleLog.length
         }
     }
-
     return [streakType, streakLength]
 }
 
@@ -144,6 +153,7 @@ function get_streak_trophies(playerBattleLog){
     let streakType = null;
     let temp_streakType = "";
     let temp_trophies = 0;
+    let trophies = 0;
 
     for(let i = 0; i < playerBattleLog.length; i++){
         if (playerBattleLog[i]["gameMode"]["name"].includes("Ladder")){
@@ -215,7 +225,7 @@ function get_streak_game_elixir_leak(playerBattleLog){
         }
     }
 
-    return streak_el/streak_len
+    return Math.trunc(streak_el/streak_len)
 }
 
 function get_streak_game_comparitive_elixir_leak(playerBattleLog){
@@ -258,7 +268,7 @@ function get_streak_game_comparitive_elixir_leak(playerBattleLog){
         }
     }
 
-    return player_el-opponent_el
+    return Math.trunc(player_el-opponent_el)
 }
 
 module.exports = { 
@@ -266,6 +276,7 @@ module.exports = {
     get_player_name,
     get_win_rate,
     get_10_game_win_rate,
+    get_20_game_win_rate,
     get_10_game_trophies,
     get_10_game_elixir_leak,
     get_10_game_comparitive_elixir_leak,
