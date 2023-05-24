@@ -5,8 +5,8 @@ function sort_by_trophies(player_data_list){
 
 function sort_by_name(player_data_list){
     return player_data_list.sort((a, b) => {
-        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        let nameB = b.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -32,9 +32,11 @@ function sort_by_20g_wr(player_data_list){
 }
 
 function sort_by_best_steak(player_data_list){
+    console.log("hi")
     return player_data_list.sort((a, b) => {
         let asl = a.streak_length;
         let bsl = b.streak_length;
+
 
         if (a.streak_type === "lose"){
             asl = asl*(-1)
@@ -43,12 +45,12 @@ function sort_by_best_steak(player_data_list){
         if (b.streak_type === "lose"){
             bsl = bsl*(-1)
         }
-
-        return b.streak_length - a.streak_length
+        return bsl - asl
     })
 }
 
 function sort_by_worst_streak(player_data_list){
+    console.log("hi")
     return player_data_list.sort((a, b) => {
         let asl = a.streak_length;
         let bsl = b.streak_length;
@@ -61,7 +63,8 @@ function sort_by_worst_streak(player_data_list){
             bsl = bsl*(-1)
         }
 
-        return a.streak_length - b.streak_length
+
+        return asl - bsl
     })
 }
 

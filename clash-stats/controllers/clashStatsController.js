@@ -130,11 +130,12 @@ exports.index = (req, res, next) => {
 
         finalData = []
 
+        console.log(sort)
+
         if (sort==="name"){
-            finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_trophies(data)));
-        } else if (sort==="name"){
             finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_name(data)));
         }else if( sort==="best-streak"){
+            console.log("here")
             finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_best_steak(data)));
         }else if(sort==="worst-streak"){
             finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_worst_streak(data)));
@@ -146,6 +147,8 @@ exports.index = (req, res, next) => {
             finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_trophies(data)));
             sort = "trophies"
         }
+
+        // console.log(finalData)
 
         res.render('index', { 
             sort: sort,
