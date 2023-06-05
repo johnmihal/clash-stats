@@ -9,7 +9,8 @@ const playerTags = [
     '%23RQURLVJY2',
     '%23J2R2RCJPV',
     '%23RCY9CVQL9',
-    '%23RPUGJC2V8'
+    '%23RPUGJC2V8',
+    '%23PRVPCPP2'
 ]
 
 
@@ -25,7 +26,9 @@ const apiConnection = require("./apiConnection.js");
 const dataProcessors = require("./dataProcessors.js");
 const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
-API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImIzNmM3YWFkLTQ4MTYtNDNhYS05MjBjLTc5MDNjNzljOGM1MSIsImlhdCI6MTY4NDk1MDE4MCwic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzQuMjA0LjEzMS4yMyIsIjMuMTM0LjIzOC4xMCIsIjMuMTI5LjExMS4yMjAiLCI1Mi4xNS4xMTguMTY4Il0sInR5cGUiOiJjbGllbnQifV19.Bb5klVvcug0vwePWXHN1FjOzulp5dqR90VHwBIZz0XRT_BBAlUAThG9xUrXyR6SdBjPn8cgDQ4hnFdp_HWebbA'
+// API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImIzNmM3YWFkLTQ4MTYtNDNhYS05MjBjLTc5MDNjNzljOGM1MSIsImlhdCI6MTY4NDk1MDE4MCwic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzQuMjA0LjEzMS4yMyIsIjMuMTM0LjIzOC4xMCIsIjMuMTI5LjExMS4yMjAiLCI1Mi4xNS4xMTguMTY4Il0sInR5cGUiOiJjbGllbnQifV19.Bb5klVvcug0vwePWXHN1FjOzulp5dqR90VHwBIZz0XRT_BBAlUAThG9xUrXyR6SdBjPn8cgDQ4hnFdp_HWebbA'
+API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImMzOGQ5NGQzLTVhZWYtNGY2MS05NmMxLTY2OGIxM2U0ZTU5YSIsImlhdCI6MTY4NTk2NzUyMywic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzQuMjA0LjEzNy40NSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.m30aPDl6Q01j1FqLk6CufOQU35U286HkZ_IdHfLpcIzdewySp_DyYSGjnhGvXPMIZi-JXSwgo2FsDrS-HbxbcA'
+
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
 
 function fullUrl(req) {
@@ -65,8 +68,11 @@ exports.index = (req, res, next) => {
 
         axios.get('https://api.clashroyale.com/v1/players/'+playerTags[9]),
         axios.get('https://api.clashroyale.com/v1/players/'+playerTags[9]+'/battlelog'),
+
+        axios.get('https://api.clashroyale.com/v1/players/'+playerTags[10]),
+        axios.get('https://api.clashroyale.com/v1/players/'+playerTags[10]+'/battlelog'),
     ]).
-    then(axios.spread((pi1,bl1,pi2,bl2,pi3,bl3,pi4,bl4,pi5,bl5,pi6,bl6,pi7,bl7,pi8,bl8,pi9,bl9,pi10,bl10) => {
+    then(axios.spread((pi1,bl1,pi2,bl2,pi3,bl3,pi4,bl4,pi5,bl5,pi6,bl6,pi7,bl7,pi8,bl8,pi9,bl9,pi10,bl10,pi11,bl11) => {
         
         Info = [];
         battleLog = [];
@@ -81,6 +87,8 @@ exports.index = (req, res, next) => {
         Info.push(pi8.data);
         Info.push(pi9.data);
         Info.push(pi10.data);
+        Info.push(pi11.data);
+
 
         battleLog.push(bl1.data);
         battleLog.push(bl2.data);
@@ -92,6 +100,8 @@ exports.index = (req, res, next) => {
         battleLog.push(bl8.data);
         battleLog.push(bl9.data);
         battleLog.push(bl10.data);
+        battleLog.push(bl11.data);
+
 
         for (player in playerTags){
 

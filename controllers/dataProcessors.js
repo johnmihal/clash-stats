@@ -1,4 +1,4 @@
-
+const moment = require('moment');
 
 function get_trophies(playerData){
     return playerData["trophies"];
@@ -271,6 +271,18 @@ function get_streak_game_comparitive_elixir_leak(playerBattleLog){
     return Math.trunc(player_el-opponent_el)
 }
 
+function get_daily_games(playerBattleLog){
+    let current_date = Date().getDate().toISOString();
+    let daily_games = 0;
+    for(let i = 0; i < playerBattleLog.length; i++){
+        game_date = Date(playerBattleLog[i]["battleTime"]);
+        if (current_date.getDate() === game_date.getDate()){
+            daily_games++;
+        }
+    }
+
+}
+
 module.exports = { 
     get_trophies,
     get_player_name,
@@ -287,5 +299,6 @@ module.exports = {
     get_streak,
     get_streak_trophies,
     get_streak_game_elixir_leak,
-    get_streak_game_comparitive_elixir_leak
+    get_streak_game_comparitive_elixir_leak,
+    get_daily_games
 };
