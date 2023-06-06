@@ -32,7 +32,6 @@ function sort_by_20g_wr(player_data_list){
 }
 
 function sort_by_best_steak(player_data_list){
-    console.log("hi")
     return player_data_list.sort((a, b) => {
         let asl = a.streak_length;
         let bsl = b.streak_length;
@@ -50,7 +49,6 @@ function sort_by_best_steak(player_data_list){
 }
 
 function sort_by_worst_streak(player_data_list){
-    console.log("hi")
     return player_data_list.sort((a, b) => {
         let asl = a.streak_length;
         let bsl = b.streak_length;

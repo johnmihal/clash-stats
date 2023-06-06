@@ -26,19 +26,19 @@ block content
       div(class="card d-flex mx-4 my-2 shadow p-3 mb-5 rounded" style="width: 18rem;")
         div( class="card-body")
           h5(class="name card-title") #{player.name}
-          p(class="card-subtitle mb-2 text-body-secondary") Trophies #{player.trophies}
+          p(class="trophy card-subtitle mb-2 text-body-secondary" data-trophies=player.trophies) Trophies #{player.trophies}
           p(class="card-subtitle mb-2 text-body-secondary") Win Rate #{player.winrate} %
           ul(class="list-group list-group-flush")
             if player.streak_length != 1
-              li(class="list-group-item") #{player.streak_length} game steak of #{player.streak_type} 
+              li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) #{player.streak_length} game steak of #{player.streak_type} 
             else
-              li(class="list-group-item") no streak 
+              li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) no streak 
 
             //- li(class="list-group-item") #{player.daily_games} games played today
 
 
-            li(class="list-group-item") 10 Game win rate #{player.ten_game_wr} %
-            li(class="list-group-item") 20 Game win rate #{player.twenty_game_wr} %
+            li(class="10gwr list-group-item" data-ten_gwr=player.ten_game_wr) 10 Game win rate #{player.ten_game_wr} %
+            li(class="20gwr list-group-item" data-twenty_gwr=player.twenty_game_wr) 20 Game win rate #{player.twenty_game_wr} %
   
   script( type= 'text/javascript',src="javascripts/sorters.js")
 
