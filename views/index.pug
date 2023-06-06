@@ -8,46 +8,24 @@ block content
     h4(class="text-center my-6") #{best_20g_wr_name} has a #{best_20g_wr}% win rate for the past 20 games!
 
   div(class="btn-group mt-5 text-center")
-    if sort === "name"
-      button(class="btn btn-primary ms-2") Name
-    else
-      a(href="/?sort=name"): button(class="btn btn-outline-primary ms-2") Name
+    button(class="btn btn-outline-primary ms-2" id="name-sort") Name
 
-    if sort === "trophies"
-      button(class="btn btn-primary ms-2") Trophies
-    else
-      a(href="/?sort=trophies"): button(class="btn btn-outline-primary ms-2") Trophies
+    button(class="btn btn-outline-primary ms-2" id="trophy-sort") Trophies
 
+    button(class="btn btn-outline-primary ms-2" id="best-streak-sort") Best Streak
 
-    if sort === "best-streak"
-      button(class="btn btn-primary ms-2") Best Streak
-    else
-      a(href="/?sort=best-streak"): button(class="btn btn-outline-primary ms-2") Best Streak
+    button(class="btn btn-outline-primary ms-2" id="worst-streak-sort") Worst Streak
+
+    button(class="btn btn-outline-primary ms-2" id="10-gwr-sort") 10 Game Win Rate
+
+    button(class="btn btn-outline-primary ms-2" id="20-gwr-sort") 20 game Win Rate
 
 
-    if sort === "worst-streak"
-      button(class="btn btn-primary ms-2") Worst Streak
-    else
-      a(href="/?sort=worst-streak"): button(class="btn btn-outline-primary ms-2") Worst Streak
-
-
-    if sort == "10gwr"
-      button(class="btn btn-primary ms-2") 10 Game Win Rate
-    else 
-      a(href="/?sort=10gwr"): button(class="btn btn-outline-primary ms-2") 10 Game Win Rate
-
-
-    if sort === "20gwr"
-      button(class="btn btn-primary ms-2") 20 game Win Rate
-    else
-      a(href="/?sort=20gwr"): button(class="btn btn-outline-primary ms-2") 20 game Win Rate
-
-
-  div(class="d-flex row mt-4")
+  div(class="d-flex row mt-4" id="card_area")
     each player in player_data_list
       div(class="card d-flex mx-4 my-2 shadow p-3 mb-5 rounded" style="width: 18rem;")
         div( class="card-body")
-          h5(class="card-title") #{player.name}
+          h5(class="name card-title") #{player.name}
           p(class="card-subtitle mb-2 text-body-secondary") Trophies #{player.trophies}
           p(class="card-subtitle mb-2 text-body-secondary") Win Rate #{player.winrate} %
           ul(class="list-group list-group-flush")
@@ -61,6 +39,10 @@ block content
 
             li(class="list-group-item") 10 Game win rate #{player.ten_game_wr} %
             li(class="list-group-item") 20 Game win rate #{player.twenty_game_wr} %
+  
+  script( type= 'text/javascript',src="javascripts/sorters.js")
+
+
 
             //- li(class="list-group-item") 10 game trophoies #{player.ten_game_trophies}
             //- li(class="list-group-item") 10 game elixir leak #{player.ten_game_el} elixir

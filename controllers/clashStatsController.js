@@ -27,7 +27,7 @@ const dataProcessors = require("./dataProcessors.js");
 const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
 // API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImIzNmM3YWFkLTQ4MTYtNDNhYS05MjBjLTc5MDNjNzljOGM1MSIsImlhdCI6MTY4NDk1MDE4MCwic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzQuMjA0LjEzMS4yMyIsIjMuMTM0LjIzOC4xMCIsIjMuMTI5LjExMS4yMjAiLCI1Mi4xNS4xMTguMTY4Il0sInR5cGUiOiJjbGllbnQifV19.Bb5klVvcug0vwePWXHN1FjOzulp5dqR90VHwBIZz0XRT_BBAlUAThG9xUrXyR6SdBjPn8cgDQ4hnFdp_HWebbA'
-API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImMzOGQ5NGQzLTVhZWYtNGY2MS05NmMxLTY2OGIxM2U0ZTU5YSIsImlhdCI6MTY4NTk2NzUyMywic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzQuMjA0LjEzNy40NSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.m30aPDl6Q01j1FqLk6CufOQU35U286HkZ_IdHfLpcIzdewySp_DyYSGjnhGvXPMIZi-JXSwgo2FsDrS-HbxbcA'
+API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjU5NjhmOGI0LTE0OGUtNDUzOS1iM2U5LTFkODE3NGU0MTlmMyIsImlhdCI6MTY4NjA1MjQ2Niwic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzQuMjE2LjIyNC4xNjgiXSwidHlwZSI6ImNsaWVudCJ9XX0.pT4zx0JQp6XjfnNC8YGgbjzsn48RZ9_FDaeHOhu2Q9djJcovUebBiOHPVWpsmZfF2b4yb_uvl9HlMw1dGWx88g'
 
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
 
@@ -132,36 +132,38 @@ exports.index = (req, res, next) => {
             data.push(x)
         }
 
-        search_params = req.query
-        console.log(search_params)
+        // search_params = req.query
+        // console.log(search_params)
         
-        sort = search_params.sort;
+        // sort = search_params.sort;
         
 
-        finalData = []
+        // finalData = []
 
-        console.log(sort)
+        // console.log(sort)
 
-        if (sort==="name"){
-            finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_name(data)));
-        }else if( sort==="best-streak"){
-            console.log("here")
-            finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_best_steak(data)));
-        }else if(sort==="worst-streak"){
-            finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_worst_streak(data)));
-        }else if(sort==="10gwr"){
-            finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_10g_wr(data)));
-        }else if(sort==="20gwr"){
-            finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_20g_wr(data)));
-        }else{
-            finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_trophies(data)));
-            sort = "trophies"
-        }
+        // if (sort==="name"){
+        //     finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_name(data)));
+        // }else if( sort==="best-streak"){
+        //     console.log("here")
+        //     finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_best_steak(data)));
+        // }else if(sort==="worst-streak"){
+        //     finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_worst_streak(data)));
+        // }else if(sort==="10gwr"){
+        //     finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_10g_wr(data)));
+        // }else if(sort==="20gwr"){
+        //     finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_20g_wr(data)));
+        // }else{
+        //     finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_trophies(data)));
+        //     sort = "trophies"
+        // }
+
+        finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_trophies(data)));
+
 
         // console.log(finalData)
 
         res.render('index', { 
-            sort: sort,
             best_streak_name: dataSorters.sort_by_best_steak(data)[0].name,
             best_streak_length: dataSorters.sort_by_best_steak(data)[0.].streak_length,
             best_10g_wr_name: dataSorters.sort_by_10g_wr(data)[0].name,
