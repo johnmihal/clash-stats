@@ -7,6 +7,14 @@ a {
   color: #00B7FF;
 }
 
+.btn{
+  --bs-border-radius: 0rem;
+}
+
+.card_area{
+  justify-content: center;
+}
+
 /* *{
   outline: hotpink solid 1px
 } */
