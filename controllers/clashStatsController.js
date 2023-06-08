@@ -26,7 +26,7 @@ const apiConnection = require("./apiConnection.js");
 const dataProcessors = require("./dataProcessors.js");
 const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
-API_KEY = process.env.API_KEY
+API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjA5NDg5OTA2LTNkY2YtNDAyMS04MmNiLWU2OTM1NmY2MDVlZCIsImlhdCI6MTY4NjIwMDQwNSwic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIyMDcuMzguMTM1LjEyNCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.0ytcfIunG2BM8MErHVOl9KYYbSX89f5Slcvuph6jD-8PIrLNXsySwHcXhkyHkvwb-CkDIS4b5NMvffgjGbUpxA'
 
 http = require("http");
 
