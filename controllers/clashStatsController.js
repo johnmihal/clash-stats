@@ -31,20 +31,17 @@ const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
 API_KEY = process.env.API_KEY
 
-var http, options, proxy, url;
-
 http = require("http");
 
-url = require("url");
 
 
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
-// axios.defaults.proxy = {
-//     protocol: 'http',
-//     host: fixieUrl.hostname,
-//     port: fixieUrl.port,
-//     auth: {username: fixieAuth[0], password: fixieAuth[1]}
-//   }
+axios.defaults.proxy = {
+    protocol: 'http',
+    host: fixieUrl.hostname,
+    port: fixieUrl.port,
+    auth: {username: fixieAuth[0], password: fixieAuth[1]}
+  }
 
 function fullUrl(req) {
     return req.originalUrl
