@@ -8,14 +8,14 @@ a {
 }
 
 .btn-group{
-  display: flex;
+  display: block;
 }
 
 .btn{
   --bs-border-radius: 0rem;
 }
 
-.card_area{
+#card_area{
   justify-content: center;
 }
 
