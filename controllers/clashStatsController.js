@@ -22,13 +22,29 @@ const clanTag = '%23Q8URC8J8'
 const axios = require('axios');
 const url = require('url');
 
+const fixieUrl = url.parse(process.env.FIXIE_URL);
+const fixieAuth = fixieUrl.auth.split(':');
+
 const apiConnection = require("./apiConnection.js");
 const dataProcessors = require("./dataProcessors.js");
 const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
 API_KEY = process.env.API_KEY
 
+var http, options, proxy, url;
+
+http = require("http");
+
+url = require("url");
+
+
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
+axios.defaults.proxy = {
+    protocol: 'http',
+    host: fixieUrl.hostname,
+    port: fixieUrl.port,
+    auth: {username: fixieAuth[0], password: fixieAuth[1]}
+  }
 
 function fullUrl(req) {
     return req.originalUrl
