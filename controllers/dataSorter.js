@@ -1,4 +1,3 @@
-
 function sort_by_trophies(player_data_list){
     return player_data_list.sort((a, b) => b.trophies - a.trophies);
 }

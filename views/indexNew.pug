@@ -1,0 +1,65 @@
+extends layout
+
+block content
+  h1(class="title fs-1") Clash Stats 🔥📈 for #{title}
+  div()
+    h2(class="text-end my-3 fs-2") #{best_streak_name} has a streak of #{best_streak_length} wins!
+    h3(class="my-4 fs-2") #{best_10g_wr_name} has a #{best_10g_wr}% win rate for the past 10 games!
+    h4(class="text-center my-6 fs-2") #{best_20g_wr_name} has a #{best_20g_wr}% win rate for the past 20 games!
+
+  div(class="btn-group mt-5 flex text-center")
+    button(class="btn my-2 btn-outline-primary ms-2" id="name-sort") Name
+
+    button(class="btn my-2 btn-outline-primary ms-2" id="trophy-sort") Trophies
+
+    button(class="btn my-2 btn-outline-primary ms-2" id="best-streak-sort") Best Streak
+
+    button(class="btn my-2 btn-outline-primary ms-2" id="worst-streak-sort") Worst Streak
+
+    button(class="btn my-2 btn-outline-primary ms-2" id="10-gwr-sort") 10 Game Win Rate
+
+    button(class="btn my-2 btn-outline-primary ms-2" id="20-gwr-sort") 20 game Win Rate
+
+
+  div(class="d-flex row mt-4" id="card_area")
+    each player in player_data_list
+      div(class="card d-flex mx-4 my-2 shadow p-3 mb-5 rounded" style="width: 18rem;")
+        div( class="card-body")
+          h5(class="name card-title") #{player.name}
+          p(class="trophy card-subtitle mb-2 text-body-secondary" data-trophies=player.trophies) Trophies #{player.trophies}
+          p(class="card-subtitle mb-2 text-body-secondary") Win Rate #{player.winrate} %
+          ul(class="list-group list-group-flush")
+            if player.streak_length != 1
+              li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) #{player.streak_length} game steak of #{player.streak_type} 
+            else
+              li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) no streak 
+
+            //- li(class="list-group-item") #{player.daily_games} games played today
+
+
+            li(class="10gwr list-group-item" data-ten_gwr=player.ten_game_wr) 10 Game win rate #{player.ten_game_wr} %
+            li(class="20gwr list-group-item" data-twenty_gwr=player.twenty_game_wr) 20 Game win rate #{player.twenty_game_wr} %
+  
+  script( type= 'text/javascript',src="/javascripts/sorters.js")
+
+
+
+            //- li(class="list-group-item") 10 game trophoies #{player.ten_game_trophies}
+            //- li(class="list-group-item") 10 game elixir leak #{player.ten_game_el} elixir
+            //- li(class="list-group-item") 10 game comparative elixir leak #{player.ten_game_el_comp} elixir
+            //- li(class="list-group-item") streak trophies #{player.streak_trophies}
+            //- li(class="list-group-item") streak elixir leak #{player.streak_el} elixir
+            //- li(class="list-group-item") streak comparative elixir leak #{player.comp_streak_el} elixir
+
+  //- p Name #{name}
+  //- p Trophies #{trophies}
+  //- p Win Rate #{winrate} %
+  //- p 10 Game win rate #{ten_game_wr}
+  //- p 10 game trphoies #{ten_game_trophies}
+  //- p 10 game elixir leak #{ten_game_el}
+  //- p 10 game comparative elixir leak #{ten_game_el_comp}
+  //- p #{streak_length} game steak of #{streak_type} 
+  //- p streak trophies #{streak_trophies}
+  //- p streak elixir leak #{streak_el}
+  //- p streak comparative elixir leak #{comp_streak_el}
+  
