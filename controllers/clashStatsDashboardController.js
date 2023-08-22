@@ -9,7 +9,8 @@ const asyncHandler = require("express-async-handler");
 const dataProcessors = require("./dataProcessors.js");
 const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
-API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImM5MjA3NWIyLWQ0YjItNDE5NS05YjA5LWU2ZThkMzMxYjc5YiIsImlhdCI6MTY5MjY2NjM3MSwic3ViIjoiZGV2ZWxvcGVyLzhkNzZlM2FhLWIwZTYtZTkwMS01NjMyLTJiMjg4YWUyYWNlNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNjIuMTk3LjE2OC4yMDEiXSwidHlwZSI6ImNsaWVudCJ9XX0.GImKCY19VzDk_vJCSenMH_upy8I1Yn4zKwt1--VYZUFVQnnDr8YKbuB91KqkT9DKYKmY9IW3Rt-GqUzdqLSAgg'
+const secrets = require('../secrets.js');
+API_KEY = secrets.clash_api_key;
 http = require("http");
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
 
