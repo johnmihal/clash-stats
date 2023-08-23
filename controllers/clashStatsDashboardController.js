@@ -126,6 +126,9 @@ exports.create_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
+        console.log(req.body.title);
+        console.log(req.body.players);
+
             // Create Author object with escaped and trimmed data
         const dashboard = new Dashboard({
             title: req.body.title,
