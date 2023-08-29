@@ -84,7 +84,7 @@ exports.show_dashboard = asyncHandler(async (req, res, next) => {
 
         finalData = JSON.parse(JSON.stringify(dataSorters.sort_by_trophies(data)));
         console.log(finalData);
-        res.render('indexNew', { 
+        res.render('dashboard', { 
             title : dashboard.title,
             best_streak_name: dataSorters.sort_by_best_steak(data)[0].name,
             best_streak_length: dataSorters.sort_by_best_steak(data)[0.].streak_length,
@@ -115,9 +115,9 @@ exports.create_post = [
         .trim()
         .isLength({ min: 1 })
         .escape()
-        .withMessage("First name must be specified.")
+        .withMessage("Title must be specified.")
         .isAlphanumeric()
-        .withMessage("First name has non-alphanumeric characters."),
+        .withMessage("Title has non-alphanumeric characters."),
     body("players")
         .trim()
         .isLength({ min: 1 })
@@ -126,8 +126,13 @@ exports.create_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
+        console.log(errors);
+
         console.log(req.body.title);
         console.log(req.body.players);
+
+        
+
 
             // Create Author object with escaped and trimmed data
         const dashboard = new Dashboard({

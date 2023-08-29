@@ -2,44 +2,48 @@ extends layout
 
 block content
   h1(class="title fs-1") Clash Stats 🔥📈
+  div(class="text-center ")
+    a(href='/create' class="btn btn-primary btn-lg mb-3") Create a custom clash royale dashboard that looks like ⬇️
+    
   div()
-    h2(class="text-end my-3 fs-2") #{best_streak_name} has a streak of #{best_streak_length} wins!
-    h3(class="my-4 fs-2") #{best_10g_wr_name} has a #{best_10g_wr}% win rate for the past 10 games!
-    h4(class="text-center my-6 fs-2") #{best_20g_wr_name} has a #{best_20g_wr}% win rate for the past 20 games!
+    div()
+      h2(class="text-end my-3 fs-2") #{best_streak_name} has a streak of #{best_streak_length} wins!
+      h3(class="my-4 fs-2") #{best_10g_wr_name} has a #{best_10g_wr}% win rate for the past 10 games!
+      h4(class="text-center my-6 fs-2") #{best_20g_wr_name} has a #{best_20g_wr}% win rate for the past 20 games!
 
-  div(class="btn-group mt-5 flex text-center")
-    button(class="btn my-2 btn-outline-primary ms-2" id="name-sort") Name
+    div(class="btn-group mt-5 flex text-center")
+      button(class="btn my-2 btn-outline-primary ms-2" id="name-sort") Name
 
-    button(class="btn my-2 btn-outline-primary ms-2" id="trophy-sort") Trophies
+      button(class="btn my-2 btn-outline-primary ms-2" id="trophy-sort") Trophies
 
-    button(class="btn my-2 btn-outline-primary ms-2" id="best-streak-sort") Best Streak
+      button(class="btn my-2 btn-outline-primary ms-2" id="best-streak-sort") Best Streak
 
-    button(class="btn my-2 btn-outline-primary ms-2" id="worst-streak-sort") Worst Streak
+      button(class="btn my-2 btn-outline-primary ms-2" id="worst-streak-sort") Worst Streak
 
-    button(class="btn my-2 btn-outline-primary ms-2" id="10-gwr-sort") 10 Game Win Rate
+      button(class="btn my-2 btn-outline-primary ms-2" id="10-gwr-sort") 10 Game Win Rate
 
-    button(class="btn my-2 btn-outline-primary ms-2" id="20-gwr-sort") 20 game Win Rate
-
-
-  div(class="d-flex row mt-4" id="card_area")
-    each player in player_data_list
-      div(class="card d-flex mx-4 my-2 shadow p-3 mb-5 rounded" style="width: 18rem;")
-        div( class="card-body")
-          h5(class="name card-title") #{player.name}
-          p(class="trophy card-subtitle mb-2 text-body-secondary" data-trophies=player.trophies) Trophies #{player.trophies}
-          p(class="card-subtitle mb-2 text-body-secondary") Win Rate #{player.winrate} %
-          ul(class="list-group list-group-flush")
-            if player.streak_length != 1
-              li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) #{player.streak_length} game steak of #{player.streak_type} 
-            else
-              li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) no streak 
-
-            //- li(class="list-group-item") #{player.daily_games} games played today
+      button(class="btn my-2 btn-outline-primary ms-2" id="20-gwr-sort") 20 game Win Rate
 
 
-            li(class="10gwr list-group-item" data-ten_gwr=player.ten_game_wr) 10 Game win rate #{player.ten_game_wr} %
-            li(class="20gwr list-group-item" data-twenty_gwr=player.twenty_game_wr) 20 Game win rate #{player.twenty_game_wr} %
-  
+    div(class="d-flex row mt-4" id="card_area")
+      each player in player_data_list
+        div(class="card d-flex mx-4 my-2 shadow p-3 mb-5 rounded" style="width: 18rem;")
+          div( class="card-body")
+            h5(class="name card-title") #{player.name}
+            p(class="trophy card-subtitle mb-2 text-body-secondary" data-trophies=player.trophies) Trophies #{player.trophies}
+            p(class="card-subtitle mb-2 text-body-secondary") Win Rate #{player.winrate} %
+            ul(class="list-group list-group-flush")
+              if player.streak_length != 1
+                li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) #{player.streak_length} game steak of #{player.streak_type} 
+              else
+                li(class="streak list-group-item" data-streak_length=player.streak_length data-streak_type=player.streak_type) no streak 
+
+              //- li(class="list-group-item") #{player.daily_games} games played today
+
+
+              li(class="10gwr list-group-item" data-ten_gwr=player.ten_game_wr) 10 Game win rate #{player.ten_game_wr} %
+              li(class="20gwr list-group-item" data-twenty_gwr=player.twenty_game_wr) 20 Game win rate #{player.twenty_game_wr} %
+    
   script( type= 'text/javascript',src="javascripts/sorters.js")
 
 

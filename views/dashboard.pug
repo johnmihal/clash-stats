@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  div(class="text-end")
+      button#share(class=" btn btn-secondary btn-sm" )  Share Dashboard 📢
+      p#shared(class="mt-2")
   h1(class="title fs-1") Clash Stats 🔥📈 for #{title}
   div()
     h2(class="text-end my-3 fs-2") #{best_streak_name} has a streak of #{best_streak_length} wins!
@@ -41,6 +44,8 @@ block content
             li(class="20gwr list-group-item" data-twenty_gwr=player.twenty_game_wr) 20 Game win rate #{player.twenty_game_wr} %
   
   script( type= 'text/javascript',src="/javascripts/sorters.js")
+  script( type= 'text/javascript',src="/javascripts/dashboard.js")
+
 
 
 
