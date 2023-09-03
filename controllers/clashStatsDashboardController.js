@@ -10,6 +10,7 @@ const dataProcessors = require("./dataProcessors.js");
 const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
 const secrets = require('../secrets.js');
+const { exit } = require('process');
 API_KEY = secrets.clash_api_key;
 http = require("http");
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
@@ -105,7 +106,12 @@ exports.show_dashboard = asyncHandler(async (req, res, next) => {
 });
 
 exports.create_get = asyncHandler(async (req, res, next) => {
-    res.render("create");
+    res.render("create", {
+        title: "",
+        tag1: "",
+        otherTags: [],
+        errors: [],
+        });
 });
 
 exports.create_post = [
@@ -115,21 +121,64 @@ exports.create_post = [
         .trim()
         .isLength({ min: 1 })
         .escape()
-        .withMessage("Title must be specified.")
-        .isAlphanumeric()
-        .withMessage("Title has non-alphanumeric characters."),
+        .withMessage("Title must be specified."),
     body("players")
         .trim()
-        .isLength({ min: 1 })
         .escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
+        let custom_errors = [];
 
         console.log(errors);
 
         console.log(req.body.title);
         console.log(req.body.players);
+
+        let temp_p = [];
+        let temp_p_for_errors = [];
+
+
+        if (Array.isArray(req.body.players)){
+            
+            for (player of req.body.players){
+                console.log("player");
+                console.log(player);
+                if (player != ''){
+                    temp_p_for_errors.push(player);
+                    temp_p.push(player.replace(/#/g, function (x) {
+                        return '%23';
+                    }));
+                }
+            }
+        }else{
+            if (req.body.players != ''){
+                temp_p_for_errors.push(req.body.players);
+                temp_p.push(req.body.players.replace(/#/g, function (x) {
+                    return '%23';
+                }));
+            }
+        }
+
+        if (temp_p.length < 1){
+            custom_errors.push({mg: "Dashboard must have atleast on player"});
+        }
+
+
+        for (i in temp_p){
+            await axios.get('https://api.clashroyale.com/v1/players/' + temp_p[i])
+            .then(response => {
+                console.log('1')
+                console.log(response.data)
+            }).then(data => {
+                console.log('2')
+                console.log(data)
+             })
+             .catch(error => {
+                console.log('3')
+                custom_errors.push({msg: temp_p_for_errors[i] + " is an invalid player tag."})
+             });
+        }
 
         
 
@@ -137,16 +186,30 @@ exports.create_post = [
             // Create Author object with escaped and trimmed data
         const dashboard = new Dashboard({
             title: req.body.title,
-            players: req.body.players
+            players: temp_p
         });
+
+        console.log(errors);
     
         if (!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values/errors messages.
             res.render("create", {
+            title: req.body.title,
+            tag1: temp_p_for_errors[0],
+            otherTags: temp_p_for_errors.slice(1),
             errors: errors.array(),
             });
             return;
-        } else {
+        }else if (custom_errors.length!=0) {
+            // There are errors. Render form again with sanitized values/errors messages.
+            res.render("create", {
+            title: req.body.title,
+            tag1: temp_p_for_errors[0],
+            otherTags: temp_p_for_errors.slice(1),
+            custom_errors: custom_errors,
+            });
+            return;
+        }else {
             // Data from form is valid.
     
             // Save author.

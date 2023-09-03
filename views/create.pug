@@ -8,11 +8,15 @@ block content
     form(method='POST' action='')
         div.form-group(class = "mt-3")
             label(for='title' class="fs-5") Dashboard Name:
-            input#title.form-control(type='text', placeholder='Name of Dashboard' name='title' required='true' value=(undefined===dashboard ? '' : dashboard.title) )
+            input#title.form-control(type='text', placeholder='Name of Dashboard' name='title' required='true' value=(title) )
         div#form-group-tags.form-group(class="mt-3")
             label(for='players' class="fs-5") Player Tags:
             div(class="mt-1")
-                input(class= "mx4").form-control(type='text', placeholder='Player Tag' name='players' required='true' value=(undefined===dashboard ? '' : dashboard.players))
+                input(class= "mx4").form-control(type='text', placeholder='Player Tag' name='players' required='true' value=(tag1))
+            each tag in otherTags
+                div(class="mt-1")
+                input(class= "mx4").form-control(type='text', placeholder='Player Tag' name='players' value=(tag))
+ 
         div.add-btn(class="mb-3 mt-1")
             button#add(class = "btn btn-secondary btn-sm" type="button") +
 
@@ -22,5 +26,11 @@ block content
         ul
             for error in errors
                 li!= error.msg
+
+    if custom_errors
+        ul 
+            for error in custom_errors
+                li!= error.msg
+
 
     script( type= 'text/javascript',src="/javascripts/create.js")
