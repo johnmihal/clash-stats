@@ -28,6 +28,7 @@ const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
 // const secrets = require('../secrets.js');
 // API_KEY = secrets.clash_api_key;
+API_KEY = process.env.clash_api_key;
 
 http = require("http");
 
