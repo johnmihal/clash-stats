@@ -12,10 +12,10 @@ const { response } = require('../app.js');
 // const secrets = require('../secrets.js');
 const { exit } = require('process');
 // API_KEY = secrets.clash_api_key;
-API_KEY = process.env.clash_api_key;
+// API_KEY = process.env.clash_api_key;
 
 http = require("http");
-axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
+axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.clash_api_key}`;
 
 
 async function getPlayer(player){
