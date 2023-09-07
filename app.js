@@ -7,14 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var mtaRouter = require('./routes/mta');
 
-// const secrets = require('./secrets');
+const secrets = require('./secrets');
 
 var app = express();
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = process.env.mongo_db_link;
-// const mongoDB = secrets.mongo_db_link;
+// const mongoDB = process.env.mongo_db_link;
+const mongoDB = secrets.mongo_db_link;
 
 main().catch((err) => console.log(err));
 async function main() {

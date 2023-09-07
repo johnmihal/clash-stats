@@ -9,10 +9,10 @@ const asyncHandler = require("express-async-handler");
 const dataProcessors = require("./dataProcessors.js");
 const dataSorters = require("./dataSorter.js");
 const { response } = require('../app.js');
-// const secrets = require('../secrets.js');
+const secrets = require('../secrets.js');
 const { exit } = require('process');
-// API_KEY = secrets.clash_api_key;
-API_KEY = process.env.clash_api_key;
+API_KEY = secrets.clash_api_key;
+// API_KEY = process.env.clash_api_key;
 
 http = require("http");
 axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
