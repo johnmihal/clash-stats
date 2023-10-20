@@ -129,16 +129,31 @@ exports.index = (req, res, next) => {
 
             x.trophies = dataProcessors.get_trophies(playerInfo);
             x.winrate = dataProcessors.get_win_rate(playerInfo);
-            x.ten_game_wr = dataProcessors.get_10_game_win_rate(playerBattleLog);
-            x.twenty_game_wr = dataProcessors.get_20_game_win_rate(playerBattleLog);
-            x.ten_game_trophies = dataProcessors.get_10_game_trophies(playerBattleLog);
-            x.ten_game_el = dataProcessors.get_10_game_elixir_leak(playerBattleLog);
-            x.ten_game_el_comp = dataProcessors.get_10_game_comparitive_elixir_leak(playerBattleLog);
-            x.streak_type = streak[0];
-            x.streak_length = streak[1];
-            x.streak_trophies = dataProcessors.get_streak_trophies(playerBattleLog);
-            x.streak_el = dataProcessors.get_streak_game_elixir_leak(playerBattleLog);
-            x.comp_streak_el = dataProcessors.get_streak_game_comparitive_elixir_leak(playerBattleLog);
+
+            if (playerBattleLog.length > 20){
+                x.ten_game_wr = dataProcessors.get_10_game_win_rate(playerBattleLog);
+                x.twenty_game_wr = dataProcessors.get_20_game_win_rate(playerBattleLog);
+                x.ten_game_trophies = dataProcessors.get_10_game_trophies(playerBattleLog);
+                x.ten_game_el = dataProcessors.get_10_game_elixir_leak(playerBattleLog);
+                x.ten_game_el_comp = dataProcessors.get_10_game_comparitive_elixir_leak(playerBattleLog);
+                x.streak_type = streak[0];
+                x.streak_length = streak[1];
+                x.streak_trophies = dataProcessors.get_streak_trophies(playerBattleLog);
+                x.streak_el = dataProcessors.get_streak_game_elixir_leak(playerBattleLog);
+                x.comp_streak_el = dataProcessors.get_streak_game_comparitive_elixir_leak(playerBattleLog);
+            } else {
+                x.ten_game_wr = "n/a";
+                x.twenty_game_wr = "n/a";
+                x.ten_game_trophies = "n/a";
+                x.ten_game_el = "n/a";
+                x.ten_game_el_comp = "n/a";
+                x.streak_type = "n/a";
+                x.streak_length = "n/a";
+                x.streak_trophies = "n/a";
+                x.streak_el = "n/a";
+                x.comp_streak_el = "n/a";
+            }
+
 
             data.push(x)
         }
