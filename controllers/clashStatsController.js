@@ -187,6 +187,15 @@ exports.index = (req, res, next) => {
     }))
     .catch(error => {
         console.log(error);
+        res.render('index', { 
+            best_streak_name: "API KEY ERROR",
+            best_streak_length: "API KEY ERROR",
+            best_10g_wr_name: "API KEY ERROR",
+            best_10g_wr: "API KEY ERROR",
+            best_20g_wr_name: "API KEY ERROR",
+            best_20g_wr: "API KEY ERROR",
+            player_data_list: ["API KEY ERROR"]
+            });
     });
 };
 
